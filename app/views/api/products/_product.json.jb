@@ -1,0 +1,10 @@
+{
+  id: product.id,
+  name: product.name,
+  description: product.description,
+  image_url: product.image_url,
+  price: product.price,
+  under_10: product.is_discounted?,
+  tax: product.tax,
+  total: product.total
+}

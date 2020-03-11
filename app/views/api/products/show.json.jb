@@ -1,5 +1,1 @@
-{
-  name: @product.name,
-  description: @product.description,  
-  price: @product.price
-}
+render partial: "product.json.jb", locals: {product: @product}
