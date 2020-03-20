@@ -1,4 +1,5 @@
 class Api::ProductsController < ApplicationController
+  before_action :authenticate_admin, only: [:create, :update, :destroy]
   def index
     #@products = Product.where('name LIKE ?', "%#{params[:search]}%")
     #if params[:discount] == 'true'
@@ -24,7 +25,10 @@ class Api::ProductsController < ApplicationController
       name: params[:input_name],
       description: params[:input_desc],
       price: params[:input_price],
-      image_url: params[:image_url]
+      #image_url: params[:image_url], 
+      supplier_id: params[:supplier_id],
+      #category: params[:input_category],
+      user_id: current_user.id,
     )
     if @product.save
       render 'show.json.jb'
@@ -39,7 +43,8 @@ class Api::ProductsController < ApplicationController
     @product.name = params[:input_name] || @product.name
     @product.description = params[:input_desc] || @product.description
     @product.price = params[:input_price] || @product.price
-    @product.image_url = params[:image_url] || @product.image_url
+    #@product.category = params[:input_category] || @product.category
+    #@product.image_url = params[:image_url] || @product.image_url
     if @product.save
       render 'show.json.jb'
     else

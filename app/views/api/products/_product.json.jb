@@ -10,3 +10,4 @@
   images: product.images, 
   current_user: current_user
 }
+#category: product.category
