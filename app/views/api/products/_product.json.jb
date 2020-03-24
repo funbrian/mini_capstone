@@ -8,6 +8,6 @@
   total: product.total, 
   supplier: product.supplier.name, 
   images: product.images, 
-  current_user: current_user
+  current_user: current_user,
+  categories: product.categories
 }
-#category: product.category

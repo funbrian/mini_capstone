@@ -10,8 +10,9 @@ class Api::ProductsController < ApplicationController
     #else
       #@products = @products.order(:id)
     #end
-    category = Category.find_by(name: params[:search])
-    @products = category.products
+    #category = Category.find_by(name: params[:search])
+    #@products = category.products
+    @products = Product.all
     render 'index.json.jb'
   end
 
@@ -22,13 +23,14 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
+    category = Category.find_by(name: params[:search])
     @product = Product.new(
       name: params[:input_name],
       description: params[:input_desc],
       price: params[:input_price],
       #image_url: params[:image_url], 
       supplier_id: params[:supplier_id],
-      #category: params[:input_category],
+      category: category,
       user_id: current_user.id,
     )
     if @product.save
@@ -44,7 +46,7 @@ class Api::ProductsController < ApplicationController
     @product.name = params[:input_name] || @product.name
     @product.description = params[:input_desc] || @product.description
     @product.price = params[:input_price] || @product.price
-    @product.category = params[:input_category] || @product.category
+    #@product.category = params[:input_category] || @product.category
     #@product.image_url = params[:image_url] || @product.image_url
     if @product.save
       render 'show.json.jb'
